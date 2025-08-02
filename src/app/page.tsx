@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { AppData, StoreData } from '@/types/store';
 import { loadFromStorage } from '@/utils/storage';
+import { createTestData } from '@/utils/testData';
+import AdminAccess from '@/components/AdminAccess';
 
 export default function Home() {
   const [appData, setAppData] = useState<AppData | null>(null);
@@ -10,7 +12,14 @@ export default function Home() {
   const [filteredData, setFilteredData] = useState<StoreData[]>([]);
 
   useEffect(() => {
-    const data = loadFromStorage();
+    let data = loadFromStorage();
+    
+    // If no data exists, load sample data for demonstration
+    if (!data || data.storeData.length === 0) {
+      data = createTestData();
+      // Don't save it to storage automatically - just use it for display
+    }
+    
     setAppData(data);
     setFilteredData(data?.storeData || []);
   }, []);
@@ -58,14 +67,9 @@ export default function Home() {
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900">New Orleans Groceries</h1>
-            <button
-              onClick={() => window.location.href = './admin/'}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-            >
-              Admin Dashboard
-            </button>
+            <p className="text-gray-600 text-sm mt-1">Weekly deals from local grocery stores</p>
           </div>
         </div>
       </header>
@@ -90,12 +94,7 @@ export default function Home() {
         ) : filteredData.length === 0 && appData.storeData.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-gray-600 mb-4">No store data available.</p>
-            <button
-              onClick={() => window.location.href = './admin/'}
-              className="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              Configure Stores
-            </button>
+            <p className="text-gray-500 text-sm">Weekly deals will appear here when store data is loaded.</p>
           </div>
         ) : filteredData.length === 0 ? (
           <div className="text-center py-8">
@@ -165,6 +164,9 @@ export default function Home() {
           </div>
         )}
       </div>
+      
+      {/* Hidden admin access */}
+      <AdminAccess />
     </div>
   );
 }

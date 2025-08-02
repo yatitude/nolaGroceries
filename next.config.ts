@@ -5,7 +5,11 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  }
+  },
+  // Use relative imports for better subdirectory compatibility
+  compiler: {
+    removeConsole: false,
+  },
 };
 
 export default nextConfig;

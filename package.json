@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build && node fix-paths.js",
+    "build:raw": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "fix-paths": "node fix-paths.js"
   },
   "dependencies": {
     "react": "19.1.0",

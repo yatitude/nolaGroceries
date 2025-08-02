@@ -60,12 +60,12 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <h1 className="text-2xl font-bold text-gray-900">New Orleans Groceries</h1>
-            <a
-              href="/admin"
+            <button
+              onClick={() => window.location.href = './admin/'}
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
             >
               Admin Dashboard
-            </a>
+            </button>
           </div>
         </div>
       </header>
@@ -90,12 +90,12 @@ export default function Home() {
         ) : filteredData.length === 0 && appData.storeData.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-gray-600 mb-4">No store data available.</p>
-            <a
-              href="/admin"
+            <button
+              onClick={() => window.location.href = './admin/'}
               className="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
               Configure Stores
-            </a>
+            </button>
           </div>
         ) : filteredData.length === 0 ? (
           <div className="text-center py-8">

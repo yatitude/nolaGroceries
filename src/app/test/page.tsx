@@ -28,7 +28,7 @@ export default function TestPage() {
 
       <div className="space-y-4">
         <button
-          onClick={() => window.location.href = '/'}
+          onClick={() => window.location.href = '../'}
           className="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
           View Main Site
@@ -36,12 +36,12 @@ export default function TestPage() {
         
         <br />
         
-        <a
-          href="/admin"
+        <button
+          onClick={() => window.location.href = '../admin/'}
           className="inline-block px-6 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
         >
           View Admin Dashboard
-        </a>
+        </button>
       </div>
 
       <div className="mt-8 p-4 bg-gray-50 rounded">
